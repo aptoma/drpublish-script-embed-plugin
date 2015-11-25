@@ -1,3 +1,5 @@
 vendor/
 web/index.html~
 web/vendors
+node_modules/
+npm-debug.log
