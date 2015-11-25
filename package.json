@@ -13,5 +13,8 @@
   },
   "engines": {
 	"node": "~4.1.1"
+  },
+	"scripts": {
+	  "postinstall": "bower cache clean && bower install"
   }
 }
