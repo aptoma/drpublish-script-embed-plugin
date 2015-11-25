@@ -1,7 +1,7 @@
 {
     "name": "dredition-mobile-drfront-conversion-demo-eb",
     "dependencies": {
-        "handlebars": "4.*",
-		"jquery": "2.1.*"
+		"jquery": "2.1.*",
+		"plugin-api": "git@github.com:aptoma/drpublish-plugin-api.git#v2.1"
     }
 }
