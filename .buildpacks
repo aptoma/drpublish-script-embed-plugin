@@ -1,3 +1,2 @@
-https://github.com/heroku/heroku-buildpack-php.git#master
 https://github.com/heroku/heroku-buildpack-nodejs.git#master
-https://github.com/heroku/heroku-buildpack-ruby.git#master
+https://github.com/heroku/heroku-buildpack-php.git#master
