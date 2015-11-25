@@ -1,0 +1,6 @@
+{
+  "name": "DrPublish script embed plugin",
+  "description": "A scriipt embed plugin for embedding scripts in DrPublish documents",
+  "repository": "https://github.com/aptoma/drpublish-script-embed-plugin",
+  "addons": []
+}
