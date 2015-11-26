@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="favicon.ico"/>
+	<link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="stylesheets/main.css">
+	<script src="vendors/jquery/dist/jquery.min.js"></script>
+	<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="vendors/plugin-api/js/vendors/jquery.postmessage.js"></script>
+	<script src="vendors/plugin-api/js/Listeners.js"></script>
+	<script src="vendors/plugin-api/js/PluginAPI.js"></script>
+	<script src="vendors/plugin-api/js/AH5Communicator.js"></script>
+	<script src="vendors/plugin-api/js/ArticleCommunicator.js"></script>
+	<script src="vendors/html-inspector/html-inspector.js"></script>
+	<script src="vendors/bootstrap-validator/dist/validator.min.js"></script>
+	<script src="js/main.js"></script>
+	<title>DrPublish embed plugin</title>
+</head>
+	<body>
+		<form role="form" id="form">
+		<div class="form-group">
+			<label for="title">Title:</label>
+			<input type="text" placeholder="Title: max 256" maxlength="256" class="form-control" id="title" required/>
+		</div>
+		<div role="form" class="form-group" id="form">
+			<label for="embedcode">Code:</label>
+			<textarea class="form-control" placeholder="Code: <embed/>" rows="3" id="embedcode" required></textarea>
+		</div>
+		</form>
+		<ul class="nav nav-pills">
+			<li class="text-center active">
+					<button id="insertButton" class="btn btn-primary" type="button">
+						<span class="glyphicon glyphicon-log-in"></span>
+						<span>Insert</span>
+					</button>
+			</li>
+			<li class="text-center active">
+				<button id="previewButton" class="btn btn-primary" type="button">
+						<span class="glyphicon glyphicon-film"></span>
+						<span>Preview</span>
+				</button>
+			</li>
+		</ul>
+		<div id="preview"></div>
+		<div id="htmlCheck"></div>
+	</body>
+</html>
