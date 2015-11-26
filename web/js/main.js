@@ -1,6 +1,6 @@
 (function() {
 	$(document).ready(function () {
-		PluginAPI.setAppName('embed');
+		PluginAPI.setAppName('embedScriptPlugin');
 		PluginAPI.on('pluginElementClicked', function(event) {
 			if (typeof(event.data) !== 'undefined'
 				&& typeof(event.data.options) !== 'undefined'
@@ -13,10 +13,12 @@
 		PluginAPI.on('pluginElementSelected', function(event) {
 			$('#embedcode').val('');
 			$('#title').val('');
+			$('.alert').delay(3000).fadeOut(500);
 		});
 		PluginAPI.on('pluginElementDeselected', function(event) {
 			$('#embedcode').val('');
 			$('#title').val('');
+			$('.alert').delay(3000).fadeOut(500);
 		});
 	});
 	function escapeHTML( string ) {
@@ -46,7 +48,8 @@
 	function isValidHtml(html) {
 		var isValid = true;
 		var abortWhenInvalid = false;
-		if (typeof(QueryString.abortWhenInvalid) !== 'undefined') {
+		if (typeof(QueryString.abortWhenInvalid) !== 'undefined'
+			&& QueryString.abortWhenInvalid === 'true') {
 			abortWhenInvalid = true;
 		}
 		try {
@@ -145,6 +148,12 @@
 					}
 			 }
 			 PluginAPI.Editor.insertEmbeddedAsset(markup, data, callback);
+			 $( "#preview" ).before(
+				'<div class="alert alert-success fade in">' +
+				'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+				'Successfully inserted embed.' +
+				'</div>'
+			);
 	};
 
 	function preview(html) {
@@ -175,20 +184,12 @@
 						'</div>'
 					);
 				}
-				if (typeof($('.has-error')[0]) !== 'undefined') {
-					isValid = false;
-					$( "#preview" ).before(
-						'<div class="alert alert-danger fade in">' +
-						'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
-						'The Form is not valid.' +
-						'</div>'
-					);
-				}
 
 				if (!isValid || !isValidHtml($('#embedcode').val())) {
 					return;
 				}
 				insertScript();
+				$('.alert').delay(5000).fadeOut(500);
 		});
 		$( "#previewButton" ).on( "click", function() {
 			preview($('#embedcode').val());
