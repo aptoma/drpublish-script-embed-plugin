@@ -8,15 +8,12 @@
 				&& typeof(event.data.options.title) !== 'undefined') {
 				$('#embedcode').val(event.data.options.code);
 				$('#title').val(event.data.options.title);
+				$('#preview').val(event.data.options.code);
 			}
-		});
-		PluginAPI.on('pluginElementSelected', function(event) {
-			$('#embedcode').val('');
-			$('#title').val('');
-			$('.alert').delay(3000).fadeOut(500);
 		});
 		PluginAPI.on('pluginElementDeselected', function(event) {
 			$('#embedcode').val('');
+			$('#preview').val('');
 			$('#title').val('');
 			$('.alert').delay(3000).fadeOut(500);
 		});
@@ -80,7 +77,7 @@
 			$( "#htmlCheck" ).html(html);
 			HTMLInspector.inspect({
 				domRoot: "#htmlCheck",
-				excludeRules: ["validate-attributes"],
+				excludeRules: ["validate-attributes", "unused-classes", "unnecessary-elements", "script-placement", "inline-event-handlers"],
 				onComplete: function(errors) {
 					errors.forEach(function(error) {
 						isValid = false;
