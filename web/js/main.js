@@ -8,11 +8,12 @@
 				&& typeof(event.data.options.title) !== 'undefined') {
 				$('#embedcode').val(event.data.options.code);
 				$('#title').val(event.data.options.title);
-				$('#preview').val(event.data.options.code);
+				preview(event.data.options.code);
 			}
 		});
 		PluginAPI.on('pluginElementDeselected', function(event) {
 			$('#embedcode').val('');
+			preview('');
 			$('#preview').val('');
 			$('#title').val('');
 			$('.alert').delay(3000).fadeOut(500);
