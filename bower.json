@@ -1,7 +1,10 @@
 {
-    "name": "dredition-mobile-drfront-conversion-demo-eb",
-    "dependencies": {
+	"name": "dredition-mobile-drfront-conversion-demo-eb",
+	"dependencies": {
 		"jquery": "2.1.*",
-		"plugin-api": "https://github.com/aptoma/drpublish-plugin-api.git#v2.1"
-    }
+		"bootstrap": "3.2.0",
+		"html-inspector": "0.*",
+		"plugin-api": "https://github.com/aptoma/drpublish-plugin-api.git#develop",
+		"bootstrap-validator": "https://github.com/1000hz/bootstrap-validator.git#v0.9.0"
+	}
 }
