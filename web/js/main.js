@@ -143,8 +143,7 @@
 					 previewUri: '',
 					 options: {
 							 code: embedCode,
-							 title: title,
-							 foo: 'bar'
+							 title: title
 					}
 			 }
 			 PluginAPI.Editor.insertEmbeddedAsset(markup, data, callback);
