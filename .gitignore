@@ -3,3 +3,6 @@ web/index.html~
 web/vendors
 node_modules/
 npm-debug.log
+drpublish-embed-plugin.sublime-project
+drpublish-embed-plugin.sublime-workspace
+.sass-cache/
