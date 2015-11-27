@@ -183,7 +183,7 @@
 		var isValid = true;
 
 		PluginAPI.setAppName('embedScriptPlugin');
-		PluginAPI.on('pluginElementClicked', function(event) {
+		PluginAPI.on('embeddedAssetFocus', function(event) {
 			if (typeof(event.data) !== 'undefined'
 				&& typeof(event.data.options) !== 'undefined') {
 
@@ -202,8 +202,10 @@
 				}
 			}
 		});
-		PluginAPI.on('pluginElementDeselected', function(event) {
+		PluginAPI.on('embeddedAssetBlur', function(event) {
 			clear();
+			console.log('pluginElementDeselected');
+			console.log(event);
 			$('.alert').delay(3000).fadeOut(500);
 		});
 
