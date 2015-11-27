@@ -1,30 +1,12 @@
 (function() {
-	$(document).ready(function () {
-		PluginAPI.setAppName('embedScriptPlugin');
-		PluginAPI.on('pluginElementClicked', function(event) {
-			if (typeof(event.data) !== 'undefined'
-				&& typeof(event.data.options) !== 'undefined'
-				&& typeof(event.data.options.code) !== 'undefined'
-				&& typeof(event.data.options.title) !== 'undefined') {
-				$('#embedcode').val(event.data.options.code);
-				$('#title').val(event.data.options.title);
-				preview(event.data.options.code);
-			}
-		});
-		PluginAPI.on('pluginElementDeselected', function(event) {
-			$('#embedcode').val('');
-			preview('');
-			$('#preview').val('');
-			$('#title').val('');
-			$('.alert').delay(3000).fadeOut(500);
-		});
-	});
-	function escapeHTML( string ) {
-		var pre = document.createElement('pre');
-		var text = document.createTextNode( string );
-		pre.appendChild(text);
-		return pre.innerHTML;
+	var clear = function() {
+		$('#preview').fadeOut(500);
+		$('#title').val('');
+		$('#width').val('');
+		$('#height').val('');
+		$('#embedcode').val('');
 	}
+
 	var QueryString = function () {
 		var query_string = {};
 		var query = window.location.search.substring(1);
@@ -42,6 +24,13 @@
 		} 
 		return query_string;
 	}();
+
+	function escapeHTML( string ) {
+		var pre = document.createElement('pre');
+		var text = document.createTextNode( string );
+		pre.appendChild(text);
+		return pre.innerHTML;
+	}
 
 	function isValidHtml(html) {
 		var isValid = true;
@@ -72,6 +61,7 @@
 					'</div>'
 				);
 			}
+			$('.alert').delay(5000).fadeOut(500);
 			return (abortWhenInvalid == false) || isValid;
 		}
 		try {
@@ -97,7 +87,8 @@
 								'</div>'
 							);
 						}
-					})
+					});
+					$('.alert').delay(5000).fadeOut(500);
 				}
 			});
 		} catch (error) {
@@ -117,6 +108,7 @@
 					'</div>'
 				);
 			}
+			$('.alert').delay(5000).fadeOut(500);
 		}
 
 		$( "#htmlCheck" ).replaceWith(
@@ -128,29 +120,34 @@
 	function insertScript() {
 		var embedCode = $('#embedcode').val();
 		var title = $('#title').val();
+		var width = $('#width').val();
+		var height = $('#height').val();
 		title = title.replace(/\</g, '&lt;').replace(/\>/g, '&gt;');
 		var markup = '<div><strong>Embed: </strong>'+ title + '</div>';
-			 var callback = function() {};
-			 var data = {
-					 embeddedTypeId: 6,
-					 assetType: 'script',
-					 externalId: '',
-					 assetClass: 'dp-script-asset',
-					 assetSource: PluginAPI.getAppName(),
-					 resourceUri: '',
-					 previewUri: '',
-					 options: {
-							 code: embedCode,
-							 title: title
-					}
-			 }
-			 PluginAPI.Editor.insertEmbeddedAsset(markup, data, callback);
-			 $( "#preview" ).before(
-				'<div class="alert alert-success fade in">' +
-				'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
-				'Successfully inserted embed.' +
-				'</div>'
-			);
+		 var callback = clear;
+		 var data = {
+				 embeddedTypeId: 6,
+				 assetType: 'script',
+				 externalId: '',
+				 assetClass: 'dp-script-asset',
+				 assetSource: PluginAPI.getAppName(),
+				 resourceUri: '',
+				 previewUri: '',
+				 options: {
+						 code: embedCode,
+						 title: title,
+						 width: width,
+						 height: height
+				}
+		 }
+		 PluginAPI.Editor.insertEmbeddedAsset(markup, data, callback);
+		 $( "#preview" ).before(
+			'<div class="alert alert-success fade in">' +
+			'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+			'Successfully inserted embed.' +
+			'</div>'
+		);
+
 	};
 
 	function preview(html) {
@@ -164,12 +161,64 @@
 		$( "#preview" ).replaceWith(
 				'<div id="preview" class="embed-responsive embed-responsive-16by9 well"><div class="embed-responsive-item">'+html+'</div></div>'
 		);
+		if ($( "#width" ).val()) {
+			$("#preview").css({
+				"width": $( "#width" ).val()
+			});
+		}
+
+		if ($( "#height" ).val()) {
+			$("#preview").css({
+				"padding-bottom":"0",
+				"height": $( "#height" ).val()
+			});
+		} else {
+			$("#preview").css({
+				"padding-bottom":"30%"
+			});
+		}
 	}
 
 	$( document ).ready(function() {
 		var isValid = true;
-		$( "#insertButton" ).on( "click", function() {
-				$('.alert').fadeOut(500);
+
+		PluginAPI.setAppName('embedScriptPlugin');
+		PluginAPI.on('pluginElementClicked', function(event) {
+			if (typeof(event.data) !== 'undefined'
+				&& typeof(event.data.options) !== 'undefined') {
+
+				if (typeof(event.data.options.code) !== 'undefined') {
+					$('#embedcode').val(event.data.options.code);
+					preview(event.data.options.code);
+				}
+				if (typeof(event.data.options.title) !== 'undefined') {
+					$('#title').val(event.data.options.title);
+				}
+				if (typeof(event.data.options.width) !== 'undefined') {
+					$('#width').val(event.data.options.width);
+				}
+				if (typeof(event.data.options.height) !== 'undefined') {
+					$('#height').val(event.data.options.height);
+				}
+			}
+		});
+		PluginAPI.on('pluginElementDeselected', function(event) {
+			clear();
+			$('.alert').delay(3000).fadeOut(500);
+		});
+
+		$('#form').validator();
+
+		$('#form').validator().on('submit', function (e) {
+			if (e.isDefaultPrevented()) {
+				$( "#preview" ).before(
+					'<div class="alert alert-danger fade in">' +
+					'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+					'The embed is invalid, please check the form.' +
+					'</div>'
+				);
+			} else {
+				e.preventDefault();
 				if (!$('#embedcode').val()) {
 					isValid = false;
 					$( "#preview" ).before(
@@ -194,16 +243,16 @@
 				}
 				insertScript();
 				$('.alert').delay(5000).fadeOut(500);
+			}
 		});
+
 		$( "#previewButton" ).on( "click", function() {
+			$('.alert').fadeOut(500);
 			preview($('#embedcode').val());
 		});
 		$( "#clearButton" ).on( "click", function() {
-			$('#preview').fadeOut(500).val('');
 			$('.alert').fadeOut(500);
-			$('#title').val('');
-			$('#embedcode').val('');
+			clear();
 		});
-		$('#form').validator();
 	});
 })();

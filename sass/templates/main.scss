@@ -20,7 +20,7 @@ body {
     max-width: 98% ;
     margin-bottom: 1em;
     &.embed-responsive.embed-responsive-16by9 {
-        //padding-bottom: 30%;
+        //padding-bottom: 0%;
     }
 }
 
@@ -33,4 +33,7 @@ body {
 }
 
 
+.inner {
+    margin: 0 10px;
+}
 

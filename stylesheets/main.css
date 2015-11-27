@@ -36,3 +36,8 @@ body {
 .alert {
   max-width: 98%;
 }
+
+/* line 36, ../sass/templates/main.scss */
+.inner {
+  margin: 0 10px;
+}
