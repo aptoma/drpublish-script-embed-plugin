@@ -123,7 +123,7 @@
 		var height = $('#height').val();
 		title = title.replace(/\</g, '&lt;').replace(/\>/g, '&gt;');
 		var markup = '<div><strong>Embed: </strong>'+ title + '</div>';
-		 var callback = clear;
+
 		 var data = {
 				 embeddedTypeId: 6,
 				 assetType: 'script',
@@ -139,7 +139,7 @@
 						 height: height
 				}
 		 }
-		 PluginAPI.Editor.insertEmbeddedAsset(markup, data, callback);
+		 PluginAPI.Editor.insertEmbeddedAsset(markup, data, clear);
 		 $( "#preview" ).before(
 			'<div class="alert alert-success fade in">' +
 			'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
@@ -158,7 +158,7 @@
 			return;
 		}
 		console.log(html);
-		$( "#previewBox" ).html(html);
+		$( "#previewBox" ).html(html).delay(500).fadeIn(500);
 		if ($( "#width" ).val()) {
 			$("#previewBox").css({
 				"width": $( "#width" ).val()
@@ -204,14 +204,13 @@
 		});
 		PluginAPI.on('embeddedAssetBlur', function(event) {
 			clear();
-			console.log('pluginElementDeselected');
-			console.log(event);
-			$('.alert').delay(3000).fadeOut(500);
+			$( "#previewBox" ).fadeOut(500).delay(500).html('');
 		});
 
 		$('#form').validator();
 
 		$('#form').validator().on('submit', function (e) {
+			$( "#previewBox" ).fadeOut(500).delay(500).html('');
 			if (e.isDefaultPrevented()) {
 				$( "#preview" ).before(
 					'<div class="alert alert-danger fade in">' +
