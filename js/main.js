@@ -191,6 +191,12 @@
 		$( "#previewButton" ).on( "click", function() {
 			preview($('#embedcode').val());
 		});
+		$( "#clearButton" ).on( "click", function() {
+			$('#preview').fadeOut(500).val('');
+			$('.alert').fadeOut(500);
+			$('#title').val('');
+			$('#embedcode').val('');
+		});
 		$('#form').validator();
 	});
 })();
