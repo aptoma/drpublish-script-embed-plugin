@@ -28,16 +28,29 @@ body {
 }
 
 /* line 24, ../sass/templates/main.scss */
+#previewBox {
+  display: inline-block;
+}
+
+/* line 28, ../sass/templates/main.scss */
 #htmlCheck {
   display: none;
 }
 
-/* line 28, ../sass/templates/main.scss */
+/* line 32, ../sass/templates/main.scss */
 .alert {
   max-width: 98%;
 }
 
-/* line 33, ../sass/templates/main.scss */
+/* line 37, ../sass/templates/main.scss */
 .inner {
   margin: 0 10px;
+}
+
+/* line 41, ../sass/templates/main.scss */
+.modal.fade .modal-dialog {
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  -moz-transition: -moz-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
 }

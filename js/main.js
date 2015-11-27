@@ -1,6 +1,5 @@
 (function() {
 	var clear = function() {
-		$('#preview').fadeOut(500);
 		$('#title').val('');
 		$('#width').val('');
 		$('#height').val('');
@@ -158,24 +157,25 @@
 		if (!isValidHtml(html)) {
 			return;
 		}
-		$( "#preview" ).replaceWith(
-				'<div id="preview" class="embed-responsive embed-responsive-16by9 well"><div class="embed-responsive-item">'+html+'</div></div>'
-		);
+		console.log(html);
+		$( "#previewBox" ).html(html);
 		if ($( "#width" ).val()) {
-			$("#preview").css({
+			$("#previewBox").css({
 				"width": $( "#width" ).val()
 			});
 		}
 
 		if ($( "#height" ).val()) {
-			$("#preview").css({
+			$("#previewBox").css({
 				"padding-bottom":"0",
 				"height": $( "#height" ).val()
 			});
 		} else {
-			$("#preview").css({
+			/*
+			$("#previewBox").css({
 				"padding-bottom":"115%"
 			});
+			*/
 		}
 	}
 
