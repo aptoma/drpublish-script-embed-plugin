@@ -154,6 +154,13 @@
 	};
 
 	function preview(html) {
+		$('.alert').fadeOut(500);
+		if (!html) {
+			return;
+		}
+		if (!isValidHtml(html)) {
+			return;
+		}
 		$( "#preview" ).replaceWith(
 				'<div id="preview" class="embed-responsive embed-responsive-16by9 well"><div class="embed-responsive-item">'+html+'</div></div>'
 		);
@@ -162,7 +169,7 @@
 	$( document ).ready(function() {
 		var isValid = true;
 		$( "#insertButton" ).on( "click", function() {
-				$('.alert').remove();
+				$('.alert').fadeOut(500);
 				if (!$('#embedcode').val()) {
 					isValid = false;
 					$( "#preview" ).before(
