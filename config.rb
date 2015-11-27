@@ -3,7 +3,7 @@ require 'compass/import-once/activate'
 # Require any additional compass plugins here.
 
 http_path = "/"
-css_dir = "web/stylesheets"
+css_dir = "stylesheets"
 sass_dir = "sass/templates"
 images_dir = "images"
 javascripts_dir = "js"

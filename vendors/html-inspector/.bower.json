@@ -1,0 +1,30 @@
+{
+  "name": "html-inspector",
+  "version": "0.8.2",
+  "main": "html-inspector.js",
+  "ignore": [
+    "bin",
+    "img",
+    "src",
+    "test",
+    ".*",
+    "bower.json",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "FAQs.md",
+    "Gruntfile.js",
+    "package.json",
+    "README.md",
+    "try.html"
+  ],
+  "homepage": "https://github.com/philipwalton/html-inspector",
+  "_release": "0.8.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.8.2",
+    "commit": "bbd95fa1520359b2857b458565053cf293615308"
+  },
+  "_source": "git://github.com/philipwalton/html-inspector.git",
+  "_target": "0.*",
+  "_originalSource": "html-inspector"
+}

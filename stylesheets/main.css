@@ -1,0 +1,38 @@
+/* line 1, ../sass/templates/main.scss */
+body {
+  padding: 24px;
+}
+
+/* line 5, ../sass/templates/main.scss */
+.nav-pills {
+  margin-bottom: 1em;
+}
+/* line 7, ../sass/templates/main.scss */
+.nav-pills h4 {
+  margin-top: 0;
+}
+/* line 10, ../sass/templates/main.scss */
+.nav-pills li {
+  min-width: 90px;
+}
+
+/* line 15, ../sass/templates/main.scss */
+#embedcode, #title {
+  width: 98%;
+}
+
+/* line 19, ../sass/templates/main.scss */
+#preview {
+  max-width: 98%;
+  margin-bottom: 1em;
+}
+
+/* line 27, ../sass/templates/main.scss */
+#htmlCheck {
+  display: none;
+}
+
+/* line 31, ../sass/templates/main.scss */
+.alert {
+  max-width: 98%;
+}

@@ -1,0 +1,20 @@
+{
+  "name": "html-inspector",
+  "version": "0.8.2",
+  "main": "html-inspector.js",
+  "ignore": [
+    "bin",
+    "img",
+    "src",
+    "test",
+    ".*",
+    "bower.json",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "FAQs.md",
+    "Gruntfile.js",
+    "package.json",
+    "README.md",
+    "try.html"
+  ]
+}

@@ -1,6 +1,4 @@
-vendor/
-web/index.html~
-web/vendors
+*/*.*~
 node_modules/
 npm-debug.log
 drpublish-embed-plugin.sublime-project
