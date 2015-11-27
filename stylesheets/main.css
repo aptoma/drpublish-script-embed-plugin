@@ -27,17 +27,17 @@ body {
   margin-bottom: 1em;
 }
 
-/* line 27, ../sass/templates/main.scss */
+/* line 24, ../sass/templates/main.scss */
 #htmlCheck {
   display: none;
 }
 
-/* line 31, ../sass/templates/main.scss */
+/* line 28, ../sass/templates/main.scss */
 .alert {
   max-width: 98%;
 }
 
-/* line 36, ../sass/templates/main.scss */
+/* line 33, ../sass/templates/main.scss */
 .inner {
   margin: 0 10px;
 }

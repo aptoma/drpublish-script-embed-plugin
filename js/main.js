@@ -174,7 +174,7 @@
 			});
 		} else {
 			$("#preview").css({
-				"padding-bottom":"30%"
+				"padding-bottom":"115%"
 			});
 		}
 	}
