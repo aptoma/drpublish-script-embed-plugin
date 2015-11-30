@@ -29,6 +29,11 @@ body {
     display: none;
 }
 
+#floatOptions {
+  display: table;
+  margin-bottom: 10px;
+}
+
 .alert {
     max-width: 98% ;
 }
@@ -38,13 +43,15 @@ body {
     margin: 0 10px;
 }
 
-.modal.fade .modal-dialog {
-  -webkit-transition: -webkit-transform 0.3s ease-out;
-     -moz-transition: -moz-transform 0.3s ease-out;
-       -o-transition: -o-transform 0.3s ease-out;
-          transition: transform 0.3s ease-out;
+.form-horizontal .form-group.input-size-el {
+    width: 210px;
+    vertical-align: top;
+    display: inline-block;
+    margin-left: -10px;
+    margin-right: 0px;
 }
 
-.modal.in .modal-dialog {
-
+.row .col-xs-1 {
+  width: 70px;
 }
+

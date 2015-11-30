@@ -4,6 +4,10 @@
 		$('#width').val('');
 		$('#height').val('');
 		$('#embedcode').val('');
+		$('input[name="float"]').each(function () {
+			$(this).prop('checked', false);
+		});
+		$('#floatOptions :input[value="none"]').prop('checked', true);
 	}
 
 	var QueryString = function () {
@@ -121,14 +125,20 @@
 		var title = $('#title').val();
 		var width = $('#width').val();
 		var height = $('#height').val();
-		title = title.replace(/\</g, '&lt;').replace(/\>/g, '&gt;');
+		var floatDirection = $('input[name="float"]:checked').val() || 'none';
+		floatClass = '';
+		if (floatDirection != 'none') {
+			floatClass = ' dp-float-' + floatDirection;
+		}
+
+		var title = title.replace(/\</g, '&lt;').replace(/\>/g, '&gt;');
 		var markup = '<div><strong>Embed: </strong>'+ title + '</div>';
 
 		 var data = {
 				 embeddedTypeId: 6,
 				 assetType: 'script',
 				 externalId: '',
-				 assetClass: 'dp-script-asset',
+				 assetClass: 'dp-script-asset' + floatClass,
 				 assetSource: PluginAPI.getAppName(),
 				 resourceUri: '',
 				 previewUri: '',
@@ -136,10 +146,11 @@
 						 code: embedCode,
 						 title: title,
 						 width: width,
-						 height: height
+						 height: height,
+						 floatDirection: floatDirection
 				}
 		 }
-		 PluginAPI.Editor.insertEmbeddedAsset(markup, data, clear);
+		 PluginAPI.Editor.insertEmbeddedAsset(markup, data, function(){});
 		 $( "#preview" ).before(
 			'<div class="alert alert-success fade in">' +
 			'<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
@@ -157,7 +168,6 @@
 		if (!isValidHtml(html)) {
 			return;
 		}
-		console.log(html);
 		$( "#previewBox" ).html(html).delay(500).fadeIn(500);
 		if ($( "#width" ).val()) {
 			$("#previewBox").css({
@@ -170,20 +180,40 @@
 				"padding-bottom":"0",
 				"height": $( "#height" ).val()
 			});
-		} else {
-			/*
-			$("#previewBox").css({
-				"padding-bottom":"115%"
-			});
-			*/
 		}
+		instgrm.Embeds.process();
 	}
 
 	$( document ).ready(function() {
 		var isValid = true;
 
 		PluginAPI.setAppName('embedScriptPlugin');
+		PluginAPI.on('appAuthenticated', function() {
+			PluginAPI.Editor.initMenu(['deleteButton', 'floatButtons']);
+		});
+
+		PluginAPI.on('pluginElementClicked', function(event) {
+			var id = event.data.id;
+			$('input[name="float"]').each(function () {
+				$(this).prop('checked', false);
+			});
+			PluginAPI.on('modifiedContent', function(event) {
+				PluginAPI.Editor.getHTMLById(id, function (el) {
+					if ($(el).hasClass('dp-float-right')) {
+						$('#floatOptions :input[value="right"]').prop('checked', true);
+					} else if ($(el).hasClass('dp-float-left')) {
+						$('#floatOptions :input[value="left"]').prop('checked', true);
+					} else {
+						$('#floatOptions :input[value="none"]').prop('checked', true);
+					}
+				});
+				PluginAPI.on('modifiedContent', function(event) {});
+			});
+			
+		});
+		
 		PluginAPI.on('embeddedAssetFocus', function(event) {
+			
 			if (typeof(event.data) !== 'undefined'
 				&& typeof(event.data.options) !== 'undefined') {
 
@@ -200,6 +230,15 @@
 				if (typeof(event.data.options.height) !== 'undefined') {
 					$('#height').val(event.data.options.height);
 				}
+
+				if (typeof(event.data.options.floatDirection) !== 'undefined') {
+					var radio = $('#floatOptions :input[value="' + event.data.options.floatDirection + '"]');
+					if (radio) {
+						radio.prop('checked', true);
+					}
+				}
+
+				
 			}
 		});
 		PluginAPI.on('embeddedAssetBlur', function(event) {
@@ -210,7 +249,6 @@
 		$('#form').validator();
 
 		$('#form').validator().on('submit', function (e) {
-			$( "#previewBox" ).fadeOut(500).delay(500).html('');
 			if (e.isDefaultPrevented()) {
 				$( "#preview" ).before(
 					'<div class="alert alert-danger fade in">' +
@@ -253,6 +291,7 @@
 		});
 		$( "#clearButton" ).on( "click", function() {
 			$('.alert').fadeOut(500);
+			$( "#previewBox" ).fadeOut(500).delay(500).html('');
 			clear();
 		});
 	});

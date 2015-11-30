@@ -15,6 +15,7 @@
 	<script src="vendors/plugin-api/js/ArticleCommunicator.js"></script>
 	<script src="vendors/html-inspector/html-inspector.js"></script>
 	<script src="vendors/bootstrap-validator/dist/validator.min.js"></script>
+	<script src="//platform.instagram.com/en_US/embeds.js"></script>
 	<script src="js/main.js"></script>
 	<title>DrPublish embed plugin</title>
 </head>
@@ -31,19 +32,34 @@
 				<div class="help-block with-errors"></div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-3">
+				<div class="form-group input-size-el">
 					<div  class='inner'>
 						<label for="width">Width:</label>
 						<input id="width" type="text" class="form-control" pattern="^[0-9]{1,}(px|em|rem|%)$" placeholder="100px/100%/10em/10rem">
 						<div class="help-block with-errors"></div>
 					</div>
 				</div>
-				<div class="form-group col-sm-3">
+				<div class="form-group input-size-el">
 					<div  class='inner'>
 						<label for="height">Height:</label>
 						<input id="height" type="text" class="form-control" pattern="^[0-9]{1,}(px|em|rem|%)$" placeholder="100px/100%/10em/10rem">
 						<div class="help-block with-errors"></div>
 					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<label for="floatOptions">Float:</label>
+				<div id="floatOptions">
+				<div class="radio col-xs-1">
+				  <label><input type="radio" name="float" value="none" checked="checked">none</label>
+				</div>
+				<div class="radio col-xs-1">
+				  <label><input type="radio" name="float" value="left">left</label>
+				</div>
+				<div class="radio col-xs-1">
+				  <label><input type="radio" name="float" value="right">right</label>
+				</div>
 				</div>
 			</div>
 			<ul class="nav nav-pills form-group">

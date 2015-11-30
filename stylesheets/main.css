@@ -38,19 +38,31 @@ body {
 }
 
 /* line 32, ../sass/templates/main.scss */
+#floatOptions {
+  display: table;
+  margin-bottom: 10px;
+}
+
+/* line 37, ../sass/templates/main.scss */
 .alert {
   max-width: 98%;
 }
 
-/* line 37, ../sass/templates/main.scss */
+/* line 42, ../sass/templates/main.scss */
 .inner {
   margin: 0 10px;
 }
 
-/* line 41, ../sass/templates/main.scss */
-.modal.fade .modal-dialog {
-  -webkit-transition: -webkit-transform 0.3s ease-out;
-  -moz-transition: -moz-transform 0.3s ease-out;
-  -o-transition: -o-transform 0.3s ease-out;
-  transition: transform 0.3s ease-out;
+/* line 46, ../sass/templates/main.scss */
+.form-horizontal .form-group.input-size-el {
+  width: 210px;
+  vertical-align: top;
+  display: inline-block;
+  margin-left: -10px;
+  margin-right: 0px;
+}
+
+/* line 54, ../sass/templates/main.scss */
+.row .col-xs-1 {
+  width: 70px;
 }
