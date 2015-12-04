@@ -3,8 +3,8 @@
 	"dependencies": {
 		"jquery": "2.1.*",
 		"bootstrap": "3.2.0",
-		"html-inspector": "0.*",
-		"plugin-api": "https://github.com/aptoma/drpublish-plugin-api.git#develop",
+		"html-inspector": "0.8.2",
+		"plugin-api": "https://github.com/aptoma/drpublish-plugin-api.git#ba22154",
 		"bootstrap-validator": "https://github.com/1000hz/bootstrap-validator.git#v0.9.0"
 	}
 }
