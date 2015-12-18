@@ -194,22 +194,18 @@
 
 		PluginAPI.on('pluginElementClicked', function(event) {
 			var id = event.data.id;
-			PluginAPI.on('modifiedContent', function(event) {
-				$('input[name="float"]').each(function () {
-					$(this).prop('checked', false);
-				});
-				PluginAPI.Editor.getHTMLById(id, function (el) {
-					if ($(el).hasClass('dp-float-right')) {
-						$('#floatOptions :input[value="right"]').prop('checked', true);
-					} else if ($(el).hasClass('dp-float-left')) {
-						$('#floatOptions :input[value="left"]').prop('checked', true);
-					} else {
-						$('#floatOptions :input[value="none"]').prop('checked', true);
-					}
-				});
-				PluginAPI.on('modifiedContent', function(event) {});
+			$('input[name="float"]').each(function () {
+				$(this).prop('checked', false);
 			});
-			
+			PluginAPI.Editor.getHTMLById(id, function (el) {
+				if ($(el).hasClass('dp-float-right')) {
+					$('#floatOptions :input[value="right"]').prop('checked', true);
+				} else if ($(el).hasClass('dp-float-left')) {
+					$('#floatOptions :input[value="left"]').prop('checked', true);
+				} else {
+					$('#floatOptions :input[value="none"]').prop('checked', true);
+				}
+			});
 		});
 		
 		PluginAPI.on('embeddedAssetFocus', function(event) {
