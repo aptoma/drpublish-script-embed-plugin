@@ -1,7 +1,14 @@
 ### Install
 
 ```
+cd drpublish-script-embed-plugin
 npm install
+cd /var/www
+# create symlink
+ln -s path/to/drpublish-script-embed-plugin script-embed
+# Open location in your default browser
+python -mwebbrowser http://localhost/script-embed/index.html
+
 ```
 
 ### Deploying
