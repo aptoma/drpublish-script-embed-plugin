@@ -1,6 +1,6 @@
 {
 	"name": "drpublish-script-embed-plugin",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "",
 	"main": "web/index.html",
 	"scripts": {
