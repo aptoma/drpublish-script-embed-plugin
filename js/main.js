@@ -199,10 +199,16 @@
 			});
 			PluginAPI.Editor.getHTMLById(id, function (el) {
 				if ($(el).hasClass('dp-float-right')) {
+					$('#floatOptions :input[value="left"]').prop('checked', false);
+					$('#floatOptions :input[value="none"]').prop('checked', false);
 					$('#floatOptions :input[value="right"]').prop('checked', true);
 				} else if ($(el).hasClass('dp-float-left')) {
+					$('#floatOptions :input[value="right"]').prop('checked', false);
+					$('#floatOptions :input[value="none"]').prop('checked', false);
 					$('#floatOptions :input[value="left"]').prop('checked', true);
 				} else {
+					$('#floatOptions :input[value="left"]').prop('checked', false);
+					$('#floatOptions :input[value="right"]').prop('checked', false);
 					$('#floatOptions :input[value="none"]').prop('checked', true);
 				}
 			});
