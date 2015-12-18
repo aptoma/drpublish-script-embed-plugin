@@ -1,3 +1,9 @@
+### Install
+
+```
+npm install
+```
+
 ### Deploying
 
 Get a free account on [heroku](https://dashboard.heroku.com/)
