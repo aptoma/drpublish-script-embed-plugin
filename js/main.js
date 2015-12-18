@@ -194,10 +194,10 @@
 
 		PluginAPI.on('pluginElementClicked', function(event) {
 			var id = event.data.id;
-			$('input[name="float"]').each(function () {
-				$(this).prop('checked', false);
-			});
 			PluginAPI.on('modifiedContent', function(event) {
+				$('input[name="float"]').each(function () {
+					$(this).prop('checked', false);
+				});
 				PluginAPI.Editor.getHTMLById(id, function (el) {
 					if ($(el).hasClass('dp-float-right')) {
 						$('#floatOptions :input[value="right"]').prop('checked', true);
