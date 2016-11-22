@@ -71,3 +71,29 @@ body {
 #previewButton {
   display: none;
 }
+
+/* line 62, ../sass/templates/main.scss */
+#preview {
+  margin-left: -15px;
+  display: none;
+}
+
+/* line 67, ../sass/templates/main.scss */
+#preview-frame {
+  border: solid #aaa 1px;
+  width: 450px;
+  height: 300px;
+  background-color: #FFF;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 76, ../sass/templates/main.scss */
+h4 {
+  font-size: 1em;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 0;
+}

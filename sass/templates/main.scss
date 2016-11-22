@@ -58,3 +58,26 @@ body {
 #previewButton {
   display: none;
 }
+
+#preview {
+  margin-left: -15px;
+  display: none;
+}
+
+#preview-frame { 
+  border: solid #aaa 1px;
+  width: 450px;
+  height: 300px;
+  background-color: #FFF;
+  padding: 0;
+  margin: 0;
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 0;
+}
