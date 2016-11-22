@@ -42,8 +42,12 @@
         return rex.test(embedCode);
     }
 
+    function hasScriptTag(embedCode) {
+      var rex = new RegExp(/<script[^>]*>/);
+      return rex.test(embedCode);
+    }
+
     function validateEmbedCode(embedCode, mute) {
-return true;
         if (allowUrl && isValidUrl(embedCode)) {
             return true;
         }
@@ -72,6 +76,15 @@ return true;
             $('.alert').delay(5000).fadeOut(500);
             return (abortWhenInvalid == false) || isValid;
         }
+
+        if (!hasScriptTag(embedCode) && validateWithoutScriptEmbed(embedCode)) {
+          return true;
+        }
+        return (abortWhenInvalid == false) || isValid;
+    };
+
+    function validateWithoutScriptEmbed(embedCode) {
+        var isValid = true;
         try {
             $("#htmlCheck").html(embedCode);
             HTMLInspector.inspect({
@@ -108,8 +121,8 @@ return true;
         $("#htmlCheck").replaceWith(
             '<div id="htmlCheck"></div>'
         );
-        return (abortWhenInvalid == false) || isValid;
-    };
+        return isValid;
+    }
 
     function insertScript() {
         var embedCode = $('#embedcode').val();
@@ -155,7 +168,17 @@ return true;
         $('#previewButton').toggle(validateEmbedCode(embedCode, true) && !isValidUrl(embedCode));
     }
 
-    function preview(html) {
+    function getEmbedCode() {
+      var embedCode = $("#embedcode").val();
+      var rex = new RegExp(/^<([a-zA-Z]+)[^>]*>.*<\/\1>$/);
+      if (!rex.test(embedCode)) {
+        embedCode = '<div>' + embedCode + '</div>';
+      }
+      return embedCode;
+    }
+
+    function preview() {
+        var html = getEmbedCode();
         $('.alert').fadeOut(500);
         if (!html) {
             return;
@@ -166,25 +189,30 @@ return true;
         if (html.indexOf('<script') > -1) {
             html =  html.replace(/&amp;/g,'&').replace(/\&lt\;/g, '<').replace(/\&gt\;/g, '>');
         }
+
+        // add Instagram embed preview support
+        html += '<script src="//platform.instagram.com/en_US/embeds.js"></script>';
+        html += '<script>instgrm.Embeds.process();</script>';
+
         var iframe = document.getElementById('preview-frame');
         iframe.contentWindow.document.open();
         iframe.contentWindow.document.write(html);
         iframe.contentWindow.document.close();
-/*
-        $("#previewBox").html(html).delay(500).fadeIn(500);
+
+        $('#preview').css('display', 'block');
+
         if ($("#width").val()) {
-            $("#previewBox").css({
+            $("#preview-frame").css({
                 "width": $("#width").val()
             });
         }
 
         if ($("#height").val()) {
-            $("#previewBox").css({
+            $("#preview-frame").css({
                 "padding-bottom": "0",
                 "height": $("#height").val()
             });
         }
-*/
         instgrm.Embeds.process();
     }
 
@@ -226,7 +254,7 @@ return true;
 
                 if (typeof(event.data.options.code) !== 'undefined') {
                     $('#embedcode').val(event.data.options.code);
-                    preview(event.data.options.code);
+                    preview();
                 }
                 if (typeof(event.data.options.title) !== 'undefined') {
                     $('#title').val(event.data.options.title);
@@ -257,7 +285,7 @@ return true;
         }
 
         $("#embedcode").on('change keyup paste', function () {
-            togglePreviewButton($("#embedcode").val());
+            togglePreviewButton(getEmbedCode());
         });
 
         $('#form').validator();
@@ -301,7 +329,7 @@ return true;
 
         $("#previewButton").on("click", function () {
             $('.alert').fadeOut(500);
-            preview($('#embedcode').val());
+            preview();
         });
         $("#clearButton").on("click", function () {
             $('.alert').fadeOut(500);
