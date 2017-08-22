@@ -1,0 +1,7 @@
+{
+  "disableHeight": {
+    "type": "boolean",
+    "title": "Disable embed height attribute",
+    "required": false
+  }
+}
