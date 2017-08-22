@@ -11,6 +11,7 @@
     }
 
     var allowUrl = false;
+    var config = {};
 
     var QueryString = function () {
         var query_string = {};
@@ -221,10 +222,18 @@
         allowUrl = typeof(QueryString.allowUrl) !== 'undefined' && QueryString.allowUrl === 'true';
 
         PluginAPI.setAppName('embedScriptPlugin');
+        PluginAPI.getConfiguration(function(configo) {
+                if (configo && configo.config) {
+                    config = configo.config;
+                    if (config.disableHeight === true) {
+                        $('.height-controls').hide();
+                    }
+                }
+            }
+        );
         PluginAPI.on('appAuthenticated', function () {
             PluginAPI.Editor.initMenu(['deleteButton', 'floatButtons']);
         });
-
         PluginAPI.on('pluginElementClicked', function (event) {
             var id = event.data.id;
             $('input[name="float"]').each(function () {
