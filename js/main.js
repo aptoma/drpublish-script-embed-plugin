@@ -220,13 +220,15 @@
     $(document).ready(function () {
         var isValid = true;
         allowUrl = typeof(QueryString.allowUrl) !== 'undefined' && QueryString.allowUrl === 'true';
-
+console.debug('holy shit');
         PluginAPI.setAppName('embedScriptPlugin');
         PluginAPI.getConfiguration(function(configo) {
                 if (configo && configo.config) {
                     config = configo.config;
                     if (config.disableHeight === true) {
                         $('.height-controls').hide();
+                        console.debug('width-controls', $('.width-controls').find('input'));
+                        $('.width-controls').find('input').attr('placeholder', 'percentage, e.g. "100%"').attr('pattern', '^[0-9]{1,}(%)$');
                     }
                 }
             }
