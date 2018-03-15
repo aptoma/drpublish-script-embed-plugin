@@ -377,6 +377,9 @@ PluginAPI.Editor = (function () {
             element.attr('id', elementId);
             element.attr('data-internal-id', dpArticleId);
             element.attr('data-external-id', data.externalId);
+		if (data.options && data.options.width) {
+                element.attr('width', data.options.width);
+            }
             element.addClass(data.assetClass);
             var customMarkup = $(markup);
             element.append(customMarkup);

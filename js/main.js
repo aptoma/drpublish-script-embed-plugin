@@ -126,7 +126,7 @@
     }
 
     function insertScript() {
-        var embedCode = $('#embedcode').val();
+        var embedCode = getEmbedCode();
         var title = $('#title').val();
         var width = $('#width').val();
         var height = $('#height').val();
@@ -169,8 +169,18 @@
         $('#previewButton').toggle(validateEmbedCode(embedCode, true) && !isValidUrl(embedCode));
     }
 
+    function clear16(str) {
+        return str.split('').map(function (value, index, array) {
+            var temp = value.charCodeAt(0).toString(16).toUpperCase();
+            if (temp.length > 2) {
+                return ' ';
+            }
+            return value;
+        }).join('');
+    }
+
     function getEmbedCode() {
-      var embedCode = $("#embedcode").val();
+      var embedCode = clear16($("#embedcode").val());
       var rex = new RegExp(/^<([a-zA-Z]+)[^>]*>.*<\/\1>$/);
       if (!rex.test(embedCode)) {
         embedCode = '<div>' + embedCode + '</div>';
